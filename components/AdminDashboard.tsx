@@ -12,11 +12,15 @@ import {
   Trash2,
   AlertCircle,
   GraduationCap,
-  Star
+  Star,
+  Database,
+  Wifi,
+  WifiOff
 } from 'lucide-react';
 import { Order, UserProfile, Product, Category } from '../types';
 import { dbService } from '../services/dbService';
 import { PRODUCTS as STATIC_PRODUCTS } from '../constants';
+import { supabase } from '../services/supabaseClient';
 
 const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'stats' | 'orders' | 'products' | 'users'>('stats');
@@ -24,6 +28,7 @@ const AdminDashboard: React.FC = () => {
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [customProducts, setCustomProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [dbStatus, setDbStatus] = useState<'online' | 'offline'>('offline');
   
   // Product Form State
   const [showAddForm, setShowAddForm] = useState(false);
@@ -41,6 +46,10 @@ const AdminDashboard: React.FC = () => {
   const refreshData = async () => {
     setLoading(true);
     try {
+       // ตรวจสอบสถานะการเชื่อมต่อจริง
+      const isConfigured = process.env.VITE_SUPABASE_URL && process.env.VITE_SUPABASE_URL.includes('supabase.co');
+      setDbStatus(isConfigured ? 'online' : 'offline');
+
       const [allOrders, allUsers, allCustomProducts] = await Promise.all([
         dbService.getAllOrders(),
         dbService.getUsers(),
@@ -51,6 +60,7 @@ const AdminDashboard: React.FC = () => {
       setCustomProducts(allCustomProducts);
     } catch (err) {
       console.error("Failed to fetch admin data", err);
+      setDbStatus('offline');
     } finally {
       setLoading(false);
     }
@@ -109,9 +119,20 @@ const AdminDashboard: React.FC = () => {
       <div className="flex flex-col md:flex-row gap-8">
         {/* Sidebar */}
         <div className="w-full md:w-64 space-y-2">
-          <div className="bg-white rounded-3xl p-6 shadow-xl border border-gray-100 mb-6">
+          <div className="bg-white rounded-3xl p-6 shadow-xl border border-gray-100 mb-4">
             <h2 className="text-[#3674B5] font-black text-xl mb-1 uppercase tracking-tighter">Admin Menu</h2>
             <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Management Panel</p>
+          </div>
+
+          {/* Connection Status Badge */}
+          <div className={`p-4 rounded-2xl border mb-6 flex items-center gap-3 transition-colors ${
+            dbStatus === 'online' ? 'bg-green-50 border-green-100 text-green-700' : 'bg-red-50 border-red-100 text-red-700'
+          }`}>
+            {dbStatus === 'online' ? <Wifi className="w-4 h-4" /> : <WifiOff className="w-4 h-4" />}
+            <div className="flex flex-col">
+              <span className="text-[10px] font-black uppercase">Database Status</span>
+              <span className="text-xs font-bold">{dbStatus === 'online' ? 'Connected (Supabase)' : 'Disconnected (Local)'}</span>
+            </div>
           </div>
           
           <button 
