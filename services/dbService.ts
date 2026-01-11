@@ -52,7 +52,6 @@ export const dbService = {
   },
 
   logout: async () => {
-    // Supabase session clear if using Auth, but here we use custom table
     await Promise.resolve();
   },
 
@@ -100,8 +99,13 @@ export const dbService = {
     return (data as Order[]) || [];
   },
 
-  updateOrderStatus: async (orderId: string, status: Order['status']) => {
-    await supabase.from('orders').update({ status }).eq('id', orderId);
+  updateOrderStatus: async (orderId: string, status: Order['status'], extraData: Partial<Order> = {}) => {
+    const { error } = await supabase
+      .from('orders')
+      .update({ status, ...extraData })
+      .eq('id', orderId);
+    
+    if (error) throw error;
   },
 
   // --- การจัดการสินค้า (Product Management) ---

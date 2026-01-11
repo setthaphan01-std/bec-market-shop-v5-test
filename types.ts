@@ -47,7 +47,9 @@ export interface Order {
   date: string;
   items: CartItem[];
   total: number;
-  status: 'pending' | 'shipped' | 'delivered';
+  status: 'pending' | 'confirmed' | 'shipped' | 'delivered' | 'cancelled';
+  trackingNumber?: string;
+  shippingCompany?: string;
 }
 
 export type NavTarget = 'home' | 'all-products' | 'about' | 'how-to-order' | 'shipping' | 'footer' | 'login' | 'profile' | 'admin' | Category;

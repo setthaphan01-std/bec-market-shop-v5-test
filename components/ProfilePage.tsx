@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { User, Package, Calendar, Tag, ChevronRight, ShoppingBag, Clock } from 'lucide-react';
+import { User, Package, Calendar, Tag, ChevronRight, ShoppingBag, Clock, Truck, ExternalLink } from 'lucide-react';
 import { UserProfile, Order } from '../types';
 import { dbService } from '../services/dbService';
 
@@ -12,8 +12,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
-    // Fix: dbService.getOrdersByUser is asynchronous and returns a Promise. 
-    // We must await its result inside an async function within useEffect before updating the state.
     const fetchOrders = async () => {
       try {
         const userOrders = await dbService.getOrdersByUser(user.email);
@@ -24,6 +22,16 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
     };
     fetchOrders();
   }, [user.email]);
+
+  const getStatusLabel = (status: Order['status']) => {
+    switch (status) {
+      case 'pending': return 'รอดำเนินการ';
+      case 'confirmed': return 'ยืนยันออเดอร์แล้ว';
+      case 'shipped': return 'จัดส่งแล้ว';
+      case 'cancelled': return 'ยกเลิก';
+      default: return status;
+    }
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -86,9 +94,11 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
                         <div className="flex items-center gap-2 mb-1">
                           <span className="text-sm font-black text-[#3674B5]">{order.id}</span>
                           <span className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest ${
-                            order.status === 'pending' ? 'bg-orange-100 text-orange-600' : 'bg-green-100 text-green-600'
+                            order.status === 'shipped' ? 'bg-green-100 text-green-600' : 
+                            order.status === 'cancelled' ? 'bg-red-100 text-red-600' :
+                            'bg-orange-100 text-orange-600'
                           }`}>
-                            {order.status === 'pending' ? 'รอดำเนินการ' : 'จัดส่งแล้ว'}
+                            {getStatusLabel(order.status)}
                           </span>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-gray-400">
@@ -103,13 +113,35 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ user }) => {
                         <p className="text-xl font-black text-[#3674B5]">฿{order.total.toLocaleString()}</p>
                       </div>
                     </div>
+
+                    {/* Tracking Info if Shipped */}
+                    {order.status === 'shipped' && order.trackingNumber && (
+                      <div className="mb-4 p-4 bg-blue-50 rounded-2xl border border-blue-100 flex items-center justify-between">
+                         <div className="flex items-center gap-3">
+                            <Truck className="w-5 h-5 text-[#3674B5]" />
+                            <div>
+                               <p className="text-[10px] font-black text-blue-400 uppercase">จัดส่งโดย {order.shippingCompany}</p>
+                               <p className="text-sm font-bold text-[#3674B5]">{order.trackingNumber}</p>
+                            </div>
+                         </div>
+                         <button 
+                            onClick={() => alert(`คัดลอกเลขพัสดุแล้ว: ${order.trackingNumber}`)}
+                            className="text-[10px] font-black text-[#3674B5] bg-white px-3 py-1.5 rounded-xl border border-blue-100 shadow-sm flex items-center gap-1"
+                         >
+                            <ExternalLink className="w-3 h-3" /> คัดลอก
+                         </button>
+                      </div>
+                    )}
                     
                     <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
                       {order.items.map((item, idx) => (
-                        <div key={idx} className="flex-shrink-0 w-12 h-12 bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm">
-                          <img src={item.image} alt={item.name} className="w-full h-full object-contain opacity-50" />
+                        <div key={idx} className="flex-shrink-0 w-12 h-12 bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm flex items-center justify-center p-1">
+                          <img src={item.image} alt={item.name} className="max-w-full max-h-full object-contain" />
                         </div>
                       ))}
+                      <div className="flex items-center ml-2 text-[10px] text-gray-400 font-bold uppercase">
+                         + {order.items.reduce((acc, i) => acc + i.quantity, 0)} items
+                      </div>
                     </div>
                   </div>
                 ))}
