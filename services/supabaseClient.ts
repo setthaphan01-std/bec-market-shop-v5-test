@@ -2,8 +2,8 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@^2.45.4';
 
 // ดึงค่าจาก process.env ที่กำหนดใน vite.config.ts
-const supabaseUrl = process.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || '';
+const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://riuvrddhumzxfjsvpftd.supabase.co';
+const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpdXZyZGRodW16eGZqc3ZwZnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxMjU4NDksImV4cCI6MjA4MzcwMTg0OX0.8pTatJ7u3hcDnqvuHdbqTSZSVijSkvkpqnHtBVOKuEI';
 
 // สร้าง Dummy Client เพื่อป้องกันแอปพัง (Crash) หากยังไม่มีการตั้งค่า Supabase
 const createDummyClient = () => {
