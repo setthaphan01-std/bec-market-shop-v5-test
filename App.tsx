@@ -501,6 +501,11 @@ const App: React.FC = () => {
         
         <div className="max-w-7xl mx-auto border-t border-white/10 mt-20 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-black text-white/20 uppercase tracking-[0.4em] relative z-10">
           <div className="text-center md:text-left">© 2025 BAN PHUE INDUSTRIAL COLLEGE - BEC MARKET SHOP PROJECT</div>
+          <div className="flex items-center gap-8">
+            <a href="#" className="hover:text-[#FADA7A] transition-colors">Privacy</a>
+            <a href="#" className="hover:text-[#FADA7A] transition-colors">Terms</a>
+            <a href="#" className="hover:text-[#FADA7A] transition-colors">Cookies</a>
+          </div>
         </div>
       </footer>
     </div>

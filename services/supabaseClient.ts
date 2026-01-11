@@ -1,13 +1,51 @@
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@^2.45.4';
 
-// ดึงค่าจาก process.env ที่กำหนดใน vite.config.ts
-const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://riuvrddhumzxfjsvpftd.supabase.co';
-const supabaseAnonKey = process.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJpdXZyZGRodW16eGZqc3ZwZnRkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgxMjU4NDksImV4cCI6MjA4MzcwMTg0OX0.8pTatJ7u3hcDnqvuHdbqTSZSVijSkvkpqnHtBVOKuEI';
+// ฟังก์ชันช่วยดึงค่า Environment Variables อย่างปลอดภัย
+const getEnv = (key: string): string => {
+  try {
+    // 1. ลองดึงจาก import.meta.env (มาตรฐานของ Vite)
+    // @ts-ignore
+    if (typeof import.meta !== 'undefined' && import.meta.env) {
+      // @ts-ignore
+      const val = import.meta.env[key];
+      if (val) return val;
+    }
+    
+    // 2. ลองดึงจาก process.env (มาตรฐาน Node/Vercel หรือจาก define ใน config)
+    // @ts-ignore
+    if (typeof process !== 'undefined' && process.env) {
+      // @ts-ignore
+      const val = process.env[key];
+      if (val) return val;
+    }
+  } catch (e) {
+    console.warn(`Error accessing environment variable ${key}:`, e);
+  }
+  return '';
+};
 
-// สร้าง Dummy Client เพื่อป้องกันแอปพัง (Crash) หากยังไม่มีการตั้งค่า Supabase
+const supabaseUrl = getEnv('VITE_SUPABASE_URL');
+const supabaseAnonKey = getEnv('VITE_SUPABASE_ANON_KEY');
+
+// ระบบตรวจสอบสถานะการตั้งค่า
+const validateConfig = () => {
+  if (!supabaseUrl || !supabaseAnonKey) {
+    // แสดงคำเตือนใน Console หากยังไม่ได้ตั้งค่า
+    console.warn("Supabase Config: Missing URL or Anon Key. Database features will be disabled.");
+    return false;
+  }
+  
+  if (!supabaseUrl.startsWith('http')) {
+    console.error(`Supabase Config: Invalid URL format "${supabaseUrl}"`);
+    return false;
+  }
+  
+  return true;
+};
+
+// สร้าง Client จำลองกรณีเชื่อมต่อไม่ได้ เพื่อไม่ให้แอปพัง (Graceful Degradation)
 const createDummyClient = () => {
-  console.warn("แจ้งเตือน: ไม่พบการตั้งค่า Supabase กรุณาเพิ่ม VITE_SUPABASE_URL ใน Environment Variables");
   return {
     from: () => ({
       select: () => ({
@@ -28,7 +66,10 @@ const createDummyClient = () => {
   } as any;
 };
 
-// ตรวจสอบว่ามี URL และ Key หรือไม่ก่อนสร้าง Client จริง
-export const supabase = (supabaseUrl && supabaseAnonKey && supabaseUrl.startsWith('http'))
-  ? createClient(supabaseUrl, supabaseAnonKey)
+const isReady = validateConfig();
+
+export const supabase = isReady 
+  ? createClient(supabaseUrl, supabaseAnonKey) 
   : createDummyClient();
+
+export const isSupabaseConfigured = isReady;

@@ -20,7 +20,7 @@ import {
 import { Order, UserProfile, Product, Category } from '../types';
 import { dbService } from '../services/dbService';
 import { PRODUCTS as STATIC_PRODUCTS } from '../constants';
-import { supabase } from '../services/supabaseClient';
+import { isSupabaseConfigured } from '../services/supabaseClient';
 
 const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'stats' | 'orders' | 'products' | 'users'>('stats');
@@ -46,9 +46,8 @@ const AdminDashboard: React.FC = () => {
   const refreshData = async () => {
     setLoading(true);
     try {
-       // ตรวจสอบสถานะการเชื่อมต่อจริง
-      const isConfigured = process.env.VITE_SUPABASE_URL && process.env.VITE_SUPABASE_URL.includes('supabase.co');
-      setDbStatus(isConfigured ? 'online' : 'offline');
+      // ตรวจสอบจากสถานะที่ส่งมาจาก supabaseClient
+      setDbStatus(isSupabaseConfigured ? 'online' : 'offline');
 
       const [allOrders, allUsers, allCustomProducts] = await Promise.all([
         dbService.getAllOrders(),
@@ -131,7 +130,7 @@ const AdminDashboard: React.FC = () => {
             {dbStatus === 'online' ? <Wifi className="w-4 h-4" /> : <WifiOff className="w-4 h-4" />}
             <div className="flex flex-col">
               <span className="text-[10px] font-black uppercase">Database Status</span>
-              <span className="text-xs font-bold">{dbStatus === 'online' ? 'Connected (Supabase)' : 'Disconnected (Local)'}</span>
+              <span className="text-xs font-bold">{dbStatus === 'online' ? 'Connected (Supabase)' : 'Disconnected (Check Vercel)'}</span>
             </div>
           </div>
           
