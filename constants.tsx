@@ -1,0 +1,222 @@
+
+import { Product, Category } from './types';
+
+export const PRODUCTS: Product[] = [
+  {
+    id: '1',
+    name: 'เสื้อเชิ้ตนักศึกษาชาย แขนสั้น',
+    price: 230,
+    category: Category.UNIFORM,
+    description: 'เสื้อเชิ้ตสีขาวผ้าคอตตอน ใส่สบาย ระบายอากาศได้ดี',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ปวช.',
+    isRecommended: true
+  },
+  {
+    id: '2',
+    name: 'กางเกงสแล็คชาย',
+    price: 220,
+    category: Category.UNIFORM,
+    description: 'กางเกงสแล็คสีดำ ผ้าโซล่อน ทรงสวย ใส่เรียนหรือใส่ทำงานก็ได้',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 30,
+    level: 'ปวช.'
+  },
+  {
+    id: '3',
+    name: 'เสื้อเชิ้ตนักศึกษาชาย แขนยาว',
+    price: 350,
+    category: Category.UNIFORM,
+    description: 'เสื้อเชิ้ตสีขาวผ้าคอตตอน ใส่สบาย ระบายอากาศได้',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ปวส.',
+    isRecommended: true
+  },
+  {
+    id: '4',
+    name: 'กางเกงสแล็คชาย',
+    price: 380,
+    category: Category.UNIFORM,
+    description: 'กางเกงสแล็คสีดำ ผ้านาโน ทรงสวย ใส่เรียนหรือใส่ทำงานก็ได้',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ปวส.'
+  },
+  {
+    id: '5',
+    name: 'เสื้อเชิ้ตนักศึกษาหญิง แขนสั้น',
+    price: 220,
+    category: Category.UNIFORM,
+    description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ปวช.',
+    isRecommended: true
+  },
+  {
+    id: '6',
+    name: 'กระโปรงทรงเอ ผ่าหลัง (ผ่าซ้อนทับ)',
+    price: 120,
+    category: Category.UNIFORM,
+    description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย ความยาว 20“ 22” 24” 26” 28',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ปวช./ปวส.',
+    isRecommended: true
+  },
+  {
+    id: '7',
+    name: 'เสื้อเชิ้ตนักศึกษาหญิง แขนยาว',
+    price: 270,
+    category: Category.UNIFORM,
+    description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ปวส.'
+  },
+  {
+    id: '8',
+    name: 'เสื้อพละศึกษา',
+    price: 370,
+    category: Category.UNIFORM,
+    description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    /* Fixed: Added missing comma after level property */
+    level: 'ปวช./ปวส.',
+    isRecommended: true
+  },
+  {
+    id: '9',
+    name: 'เสื้อช็อปนักศึกษา(สายช่าง/อุตสาหกรรม)',
+    price: 300,
+    category: Category.UNIFORM,
+    description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ปวช.'
+  },
+  {
+    id: '10',
+    name: 'เสื้อช็อปนักศึกษา(สายช่าง/อุตสาหกรรม)',
+    price: 300,
+    category: Category.UNIFORM,
+    description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ปวส.'
+  },
+  {
+    id: '11',
+    name: 'เสื้อช็อปนักศึกษา(สายพาณิชย์/บริหารธุรกิจ)',
+    price: 300,
+    category: Category.UNIFORM,
+    description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ปวช.'
+  },
+  {
+    id: '12',
+    name: 'เสื้อช็อปนักศึกษา(สายพาณิชย์/บริหารธุรกิจ)',
+    price: 300,
+    category: Category.UNIFORM,
+    description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ปวส.'
+  },
+  {
+    id: '20',
+    name: 'เข็มกลัดติดหน้าอก',
+    price: 70,
+    category: Category.ACCESSORIES,
+    description: 'เข็มกลัดตราวิทยาลัย ชุบทองเหลือง',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 60,
+    level: 'ทั่วไป'
+  },
+  {
+    id: '21',
+    name: 'กระดุม,ตุ้งติ้ง',
+    price: 100,
+    category: Category.ACCESSORIES,
+    description: 'กระดุมและตุ้งติ้ง จากโลหะชุบเงินอย่างดี สำหรับนักเรียนและนักศึกษาผู้หญิง',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 60,
+    level: 'ทั่วไป'
+  },
+  {
+    id: '22',
+    name: 'เนคไทวิทยาลัย',
+    price: 120,
+    category: Category.ACCESSORIES,
+    description: 'เนคไทสีน้ำเงินเข้ม ปักตราสัญลักษณ์วิทยาลัย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 80,
+    level: 'ทั่วไป'
+  },
+  {
+    id: '23',
+    name: 'เข็มขัดวิทยาลัย',
+    price: 200,
+    category: Category.ACCESSORIES,
+    description: 'เข็มขัดหนังสีดำพร้อมหัวเข็มขัดตรามหาวิทยาลัย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ทั่วไป',
+  },
+  {
+    id: '46',
+    name: 'ถุงเท้าข้อสั้นสีดำ (แพ็ค 3 คู่)',
+    price: 100,
+    category: Category.ACCESSORIES,
+    description: 'ถุงเท้าสีดำล้วน นุ่มสบาย ทนทาน',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 60,
+    level: 'ทั่วไป'
+  },
+  {
+    id: '47',
+    name: 'กระโปรงพลีท (จีบรอบ)',
+    price: 220,
+    category: Category.UNIFORM,
+    description: 'กระโปรงพลีทสีดำ ความยาว 22 นิ้ว จีบคงรูป ไม่ยับง่าย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 30,
+    level: 'ทั่วไป'
+  },
+  {
+    id: '48',
+    name: 'สมุดจดบันทึก',
+    price: 5,
+    category: Category.STATIONERY,
+    description: 'สมุดจดบันทึกปกแข็ง ลายวิทยาลัย',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 100,
+    level: 'ทั่วไป',
+    isRecommended: true
+  },
+  {
+    id: '49',
+    name: 'เนคไทมหาวิทยาลัย',
+    price: 120,
+    category: Category.ACCESSORIES,
+    description: 'เนคไทสีน้ำเงินเข้ม ปักตราสัญลักษณ์คณะ',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 80,
+    level: 'ปวส.'
+  },
+  {
+    id: '50',
+    name: 'ถุงเท้าขาว (แพ็ค 3 คู่)',
+    price: 100,
+    category: Category.ACCESSORIES,
+    description: 'ถุงเท้าสีขาวล้วน นุ่มสบาย ทนทาน',
+    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    stock: 60,
+    level: 'ทั่วไป'
+  },
+];
