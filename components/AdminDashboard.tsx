@@ -21,7 +21,8 @@ import {
   ChevronRight,
   X,
   MapPin,
-  Send
+  Send,
+  Loader2
 } from 'lucide-react';
 import { Order, UserProfile, Product, Category } from '../types';
 import { dbService } from '../services/dbService';
@@ -34,6 +35,7 @@ const AdminDashboard: React.FC = () => {
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [customProducts, setCustomProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isActionLoading, setIsActionLoading] = useState(false);
   const [dbStatus, setDbStatus] = useState<'online' | 'offline'>('offline');
   
   // Modal State
@@ -82,27 +84,39 @@ const AdminDashboard: React.FC = () => {
   const confirmedOrdersCount = orders.filter(o => o.status === 'confirmed').length;
 
   const handleUpdateStatus = async (id: string, status: Order['status'], extraData: Partial<Order> = {}) => {
+    setIsActionLoading(true);
     try {
+      if (!isSupabaseConfigured) {
+        throw new Error("ระบบฐานข้อมูลยังไม่ได้ตั้งค่า (Missing Supabase API Keys)");
+      }
+      
       await dbService.updateOrderStatus(id, status, extraData);
+      
       if (selectedOrder?.id === id) {
         setSelectedOrder(prev => prev ? { ...prev, status, ...extraData } : null);
       }
+      
       setIsShippingStep(false);
-      refreshData();
-    } catch (err) {
-      alert("ไม่สามารถอัปเดตสถานะได้");
+      await refreshData();
+      alert("อัปเดตสถานะสำเร็จ");
+    } catch (err: any) {
+      console.error("Update Status Error:", err);
+      const errorMsg = err?.message || "เกิดข้อผิดพลาดไม่ทราบสาเหตุ";
+      alert(`ไม่สามารถอัปเดตสถานะได้: ${errorMsg}\n\n*คำแนะนำ: ตรวจสอบว่าตาราง orders ใน Supabase มีคอลัมน์ trackingNumber และ shippingCompany หรือยัง?`);
+    } finally {
+      setIsActionLoading(false);
     }
   };
 
   const handleShipOrder = () => {
-    if (!trackingInfo.company || !trackingInfo.code) {
-      alert("กรุณากรอกข้อมูลขนส่งให้ครบถ้วน");
+    if (!trackingInfo.company.trim() || !trackingInfo.code.trim()) {
+      alert("กรุณากรอกข้อมูลบริษัทขนส่งและเลขพัสดุให้ครบถ้วน");
       return;
     }
     if (selectedOrder) {
       handleUpdateStatus(selectedOrder.id, 'shipped', {
-        shippingCompany: trackingInfo.company,
-        trackingNumber: trackingInfo.code
+        shippingCompany: trackingInfo.company.trim(),
+        trackingNumber: trackingInfo.code.trim()
       });
     }
   };
@@ -382,8 +396,9 @@ const AdminDashboard: React.FC = () => {
                       <label className="text-[10px] font-black text-blue-400 uppercase ml-2">บริษัทขนส่ง</label>
                       <input 
                         type="text" 
+                        disabled={isActionLoading}
                         placeholder="เช่น Flash, Kerry, ไปรษณีย์ไทย"
-                        className="w-full px-4 py-3 rounded-2xl border-none outline-none shadow-sm"
+                        className="w-full px-4 py-3 rounded-2xl border-none outline-none shadow-sm disabled:opacity-50"
                         value={trackingInfo.company}
                         onChange={e => setTrackingInfo({...trackingInfo, company: e.target.value})}
                       />
@@ -392,17 +407,31 @@ const AdminDashboard: React.FC = () => {
                       <label className="text-[10px] font-black text-blue-400 uppercase ml-2">เลขพัสดุ (Tracking Number)</label>
                       <input 
                         type="text" 
+                        disabled={isActionLoading}
                         placeholder="กรอกเลขพัสดุ"
-                        className="w-full px-4 py-3 rounded-2xl border-none outline-none shadow-sm"
+                        className="w-full px-4 py-3 rounded-2xl border-none outline-none shadow-sm disabled:opacity-50"
                         value={trackingInfo.code}
                         onChange={e => setTrackingInfo({...trackingInfo, code: e.target.value})}
                       />
                     </div>
                   </div>
                   <div className="flex gap-3">
-                    <button onClick={() => setIsShippingStep(false)} className="flex-1 py-3 text-gray-400 font-bold">ยกเลิก</button>
-                    <button onClick={handleShipOrder} className="flex-[2] bg-green-500 text-white font-black py-3 rounded-2xl shadow-lg flex items-center justify-center gap-2">
-                      <Send className="w-4 h-4" /> ยืนยันและแจ้งลูกค้า
+                    <button 
+                      type="button"
+                      disabled={isActionLoading}
+                      onClick={() => setIsShippingStep(false)} 
+                      className="flex-1 py-3 text-gray-400 font-bold disabled:opacity-30"
+                    >
+                      ยกเลิก
+                    </button>
+                    <button 
+                      type="button"
+                      disabled={isActionLoading}
+                      onClick={handleShipOrder} 
+                      className="flex-[2] bg-green-500 text-white font-black py-3 rounded-2xl shadow-lg flex items-center justify-center gap-2 hover:bg-green-600 transition-colors disabled:opacity-50"
+                    >
+                      {isActionLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                      ยืนยันและแจ้งลูกค้า
                     </button>
                   </div>
                 </div>
@@ -417,27 +446,27 @@ const AdminDashboard: React.FC = () => {
                     <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4 text-center">จัดการคำสั่งซื้อนี้</p>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                         <button 
-                          disabled={selectedOrder.status !== 'pending'}
+                          disabled={selectedOrder.status !== 'pending' || isActionLoading}
                           onClick={() => handleUpdateStatus(selectedOrder.id, 'confirmed')}
-                          className={`flex flex-col items-center gap-2 p-4 rounded-2xl transition-all border-2 ${selectedOrder.status === 'confirmed' ? 'bg-blue-50 border-blue-500 text-blue-600' : 'bg-white border-gray-100 text-gray-400 hover:border-blue-200'}`}
+                          className={`flex flex-col items-center gap-2 p-4 rounded-2xl transition-all border-2 ${selectedOrder.status === 'confirmed' ? 'bg-blue-50 border-blue-500 text-blue-600' : 'bg-white border-gray-100 text-gray-400 hover:border-blue-200'} disabled:opacity-50`}
                         >
-                          <CheckCircle2 className="w-6 h-6" />
+                          {isActionLoading ? <Loader2 className="w-6 h-6 animate-spin" /> : <CheckCircle2 className="w-6 h-6" />}
                           <span className="text-[10px] font-black uppercase">ยืนยันสต็อก</span>
                         </button>
                         
                         <button 
-                          disabled={selectedOrder.status !== 'confirmed'}
+                          disabled={selectedOrder.status !== 'confirmed' || isActionLoading}
                           onClick={() => { setIsShippingStep(true); setTrackingInfo({ company: '', code: '' }); }}
-                          className={`flex flex-col items-center gap-2 p-4 rounded-2xl transition-all border-2 ${selectedOrder.status === 'shipped' ? 'bg-green-50 border-green-500 text-green-600' : 'bg-white border-gray-100 text-gray-400 hover:border-green-200'}`}
+                          className={`flex flex-col items-center gap-2 p-4 rounded-2xl transition-all border-2 ${selectedOrder.status === 'shipped' ? 'bg-green-50 border-green-500 text-green-600' : 'bg-white border-gray-100 text-gray-400 hover:border-green-200'} disabled:opacity-50`}
                         >
                           <Truck className="w-6 h-6" />
                           <span className="text-[10px] font-black uppercase">จัดส่งสินค้า</span>
                         </button>
 
                         <button 
-                          disabled={selectedOrder.status === 'shipped' || selectedOrder.status === 'cancelled'}
+                          disabled={selectedOrder.status === 'shipped' || selectedOrder.status === 'cancelled' || isActionLoading}
                           onClick={() => handleUpdateStatus(selectedOrder.id, 'cancelled')}
-                          className={`flex flex-col items-center gap-2 p-4 rounded-2xl transition-all border-2 ${selectedOrder.status === 'cancelled' ? 'bg-red-50 border-red-500 text-red-600' : 'bg-white border-gray-100 text-gray-400 hover:border-red-200'}`}
+                          className={`flex flex-col items-center gap-2 p-4 rounded-2xl transition-all border-2 ${selectedOrder.status === 'cancelled' ? 'bg-red-50 border-red-500 text-red-600' : 'bg-white border-gray-100 text-gray-400 hover:border-red-200'} disabled:opacity-50`}
                         >
                           <XCircle className="w-6 h-6" />
                           <span className="text-[10px] font-black uppercase">ยกเลิกออเดอร์</span>
