@@ -230,7 +230,7 @@ const App: React.FC = () => {
                 </h1>
                 
                 <p className="text-white/80 text-lg md:text-2xl max-w-3xl mx-auto font-light leading-relaxed animate-in fade-in duration-1000 delay-300">
-                  เครื่องแบบนักศึกษาและอุปกรณ์การเรียนคุณภาพ <br className="hidden md:block"/> สั่งซื้อง่าย รับสินค้าไว ออกแบบมาเพื่อชาว BEC
+                  แหล่งรวมชุดนักเรียนนักศึกษา เครื่องหมายและอุปกรณ์การเรียนครบวงจร <br className="hidden md:block"/> สำหรับนักเรียนและนักศึกษา วิทยาลัยการอาชีพบ้านผือ
                 </p>
 
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
