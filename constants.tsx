@@ -8,7 +8,7 @@ export const PRODUCTS: Product[] = [
     price: 230,
     category: Category.UNIFORM,
     description: 'เสื้อเชิ้ตสีขาวผ้าคอตตอน ใส่สบาย ระบายอากาศได้ดี',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: 'image/1.png',
     stock: 100,
     level: 'ปวช.',
     isRecommended: true
@@ -19,7 +19,7 @@ export const PRODUCTS: Product[] = [
     price: 220,
     category: Category.UNIFORM,
     description: 'กางเกงสแล็คสีดำ ผ้าโซล่อน ทรงสวย ใส่เรียนหรือใส่ทำงานก็ได้',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: 'image/2.png',
     stock: 30,
     level: 'ปวช.'
   },
@@ -29,7 +29,7 @@ export const PRODUCTS: Product[] = [
     price: 350,
     category: Category.UNIFORM,
     description: 'เสื้อเชิ้ตสีขาวผ้าคอตตอน ใส่สบาย ระบายอากาศได้',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: 'image/3.png',
     stock: 100,
     level: 'ปวส.',
     isRecommended: true
@@ -40,7 +40,7 @@ export const PRODUCTS: Product[] = [
     price: 380,
     category: Category.UNIFORM,
     description: 'กางเกงสแล็คสีดำ ผ้านาโน ทรงสวย ใส่เรียนหรือใส่ทำงานก็ได้',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: 'image/4.png',
     stock: 100,
     level: 'ปวส.'
   },
@@ -50,7 +50,7 @@ export const PRODUCTS: Product[] = [
     price: 220,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: 'image/5.png',
     stock: 100,
     level: 'ปวช.',
     isRecommended: true
@@ -61,7 +61,7 @@ export const PRODUCTS: Product[] = [
     price: 120,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย ความยาว 20“ 22” 24” 26” 28',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: 'image/6.png',
     stock: 100,
     level: 'ปวช./ปวส.',
     isRecommended: true
@@ -72,7 +72,7 @@ export const PRODUCTS: Product[] = [
     price: 270,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: 'image/7.png',
     stock: 100,
     level: 'ปวส.'
   },
@@ -134,7 +134,7 @@ export const PRODUCTS: Product[] = [
     price: 70,
     category: Category.ACCESSORIES,
     description: 'เข็มกลัดตราวิทยาลัย ชุบทองเหลือง',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: 'image/20.png',
     stock: 60,
     level: 'ทั่วไป'
   },
@@ -170,22 +170,12 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: '46',
-    name: 'ถุงเท้าข้อสั้นสีดำ (แพ็ค 3 คู่)',
+    name: 'ถุงเท้าข้อสั้นสีดำ (แพ็ค 6 คู่)',
     price: 100,
     category: Category.ACCESSORIES,
     description: 'ถุงเท้าสีดำล้วน นุ่มสบาย ทนทาน',
     image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
     stock: 60,
-    level: 'ทั่วไป'
-  },
-  {
-    id: '47',
-    name: 'กระโปรงพลีท (จีบรอบ)',
-    price: 220,
-    category: Category.UNIFORM,
-    description: 'กระโปรงพลีทสีดำ ความยาว 22 นิ้ว จีบคงรูป ไม่ยับง่าย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
-    stock: 30,
     level: 'ทั่วไป'
   },
   {
@@ -198,25 +188,5 @@ export const PRODUCTS: Product[] = [
     stock: 100,
     level: 'ทั่วไป',
     isRecommended: true
-  },
-  {
-    id: '49',
-    name: 'เนคไทมหาวิทยาลัย',
-    price: 120,
-    category: Category.ACCESSORIES,
-    description: 'เนคไทสีน้ำเงินเข้ม ปักตราสัญลักษณ์คณะ',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
-    stock: 80,
-    level: 'ปวส.'
-  },
-  {
-    id: '50',
-    name: 'ถุงเท้าขาว (แพ็ค 3 คู่)',
-    price: 100,
-    category: Category.ACCESSORIES,
-    description: 'ถุงเท้าสีขาวล้วน นุ่มสบาย ทนทาน',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
-    stock: 60,
-    level: 'ทั่วไป'
   },
 ];
