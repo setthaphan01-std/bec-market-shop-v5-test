@@ -8,7 +8,7 @@ export const PRODUCTS: Product[] = [
     price: 230,
     category: Category.UNIFORM,
     description: 'เสื้อเชิ้ตสีขาวผ้าคอตตอน ใส่สบาย ระบายอากาศได้ดี',
-    image: 'image/1.png',
+    image: '/image/1.png',
     stock: 100,
     level: 'ปวช.',
     isRecommended: true
@@ -19,7 +19,7 @@ export const PRODUCTS: Product[] = [
     price: 220,
     category: Category.UNIFORM,
     description: 'กางเกงสแล็คสีดำ ผ้าโซล่อน ทรงสวย ใส่เรียนหรือใส่ทำงานก็ได้',
-    image: 'image/2.png',
+    image: '/image/2.png',
     stock: 30,
     level: 'ปวช.'
   },
@@ -29,7 +29,7 @@ export const PRODUCTS: Product[] = [
     price: 350,
     category: Category.UNIFORM,
     description: 'เสื้อเชิ้ตสีขาวผ้าคอตตอน ใส่สบาย ระบายอากาศได้',
-    image: 'image/3.png',
+    image: '/image/3.png',
     stock: 100,
     level: 'ปวส.',
     isRecommended: true
@@ -40,7 +40,7 @@ export const PRODUCTS: Product[] = [
     price: 380,
     category: Category.UNIFORM,
     description: 'กางเกงสแล็คสีดำ ผ้านาโน ทรงสวย ใส่เรียนหรือใส่ทำงานก็ได้',
-    image: 'image/4.png',
+    image: '/image/4.png',
     stock: 100,
     level: 'ปวส.'
   },
@@ -50,7 +50,7 @@ export const PRODUCTS: Product[] = [
     price: 220,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
-    image: 'image/5.png',
+    image: '/image/5.png',
     stock: 100,
     level: 'ปวช.',
     isRecommended: true
@@ -61,7 +61,7 @@ export const PRODUCTS: Product[] = [
     price: 120,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย ความยาว 20“ 22” 24” 26” 28',
-    image: 'image/6.png',
+    image: '/image/6.png',
     stock: 100,
     level: 'ปวช./ปวส.',
     isRecommended: true
@@ -72,7 +72,7 @@ export const PRODUCTS: Product[] = [
     price: 270,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
-    image: 'image/7.png',
+    image: '/image/7.png',
     stock: 100,
     level: 'ปวส.'
   },
@@ -134,7 +134,7 @@ export const PRODUCTS: Product[] = [
     price: 70,
     category: Category.ACCESSORIES,
     description: 'เข็มกลัดตราวิทยาลัย ชุบทองเหลือง',
-    image: 'image/20.png',
+    image: '/image/20.png',
     stock: 60,
     level: 'ทั่วไป'
   },
