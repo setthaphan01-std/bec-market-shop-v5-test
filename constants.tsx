@@ -134,7 +134,7 @@ export const PRODUCTS: Product[] = [
     price: 70,
     category: Category.ACCESSORIES,
     description: 'เข็มกลัดตราวิทยาลัย ชุบทองเหลือง',
-    image: 'public/image/20.png',
+    image: '/image/20.png',
     stock: 60,
     level: 'ทั่วไป'
   },
