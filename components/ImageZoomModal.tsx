@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { X, ZoomIn, ShoppingCart } from 'lucide-react';
+import { X, ZoomIn, ShoppingCart, GraduationCap } from 'lucide-react';
 import { Product } from '../types';
 
 interface ImageZoomModalProps {
@@ -10,6 +10,20 @@ interface ImageZoomModalProps {
 }
 
 const ImageZoomModal: React.FC<ImageZoomModalProps> = ({ product, onClose, onAddToCart }) => {
+  // ฟังก์ชันช่วยกำหนดสีตามระดับชั้นเพื่อให้ตรงกับหน้าหลัก
+  const getLevelStyles = (level: string | undefined) => {
+    switch (level) {
+      case 'ปวช.':
+        return 'bg-blue-50 text-blue-600 border-blue-100';
+      case 'ปวส.':
+        return 'bg-purple-50 text-purple-600 border-purple-100';
+      case 'ปวช./ปวส.':
+        return 'bg-pink-50 text-pink-600 border-pink-100';
+      default:
+        return 'bg-gray-50 text-gray-500 border-gray-100';
+    }
+  };
+
   return (
     <div 
       className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300"
@@ -44,9 +58,10 @@ const ImageZoomModal: React.FC<ImageZoomModalProps> = ({ product, onClose, onAdd
             <span className="text-[#3674B5] font-black text-xs uppercase tracking-[0.2em]">{product.category}</span>
             <h2 className="text-3xl font-black text-[#3674B5] leading-tight">{product.name}</h2>
             {product.level && (
-              <span className="inline-block px-3 py-1 bg-[#FADA7A] text-[#3674B5] rounded-lg text-xs font-black uppercase tracking-tighter shadow-sm">
+              <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-tighter shadow-sm border ${getLevelStyles(product.level)}`}>
+                <GraduationCap className="w-4 h-4" />
                 สำหรับ {product.level}
-              </span>
+              </div>
             )}
           </div>
 
