@@ -94,7 +94,7 @@ export const PRODUCTS: Product[] = [
     price: 300,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: '/image/9.png',
     stock: 100,
     level: 'ปวช.'
   },
@@ -104,7 +104,7 @@ export const PRODUCTS: Product[] = [
     price: 300,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: '/image/10.png',
     stock: 100,
     level: 'ปวส.'
   },
@@ -114,7 +114,7 @@ export const PRODUCTS: Product[] = [
     price: 300,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: '/image/11.png',
     stock: 100,
     level: 'ปวช.'
   },
@@ -124,7 +124,7 @@ export const PRODUCTS: Product[] = [
     price: 300,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: '/image/12.png',
     stock: 100,
     level: 'ปวส.'
   },
@@ -144,7 +144,7 @@ export const PRODUCTS: Product[] = [
     price: 100,
     category: Category.ACCESSORIES,
     description: 'กระดุมและตุ้งติ้ง จากโลหะชุบเงินอย่างดี สำหรับนักเรียนและนักศึกษาผู้หญิง',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: '/image/21.png',
     stock: 60,
     level: 'ทั่วไป'
   },
@@ -154,7 +154,7 @@ export const PRODUCTS: Product[] = [
     price: 120,
     category: Category.ACCESSORIES,
     description: 'เนคไทสีน้ำเงินเข้ม ปักตราสัญลักษณ์วิทยาลัย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: '/image/22.png',
     stock: 80,
     level: 'ทั่วไป'
   },
