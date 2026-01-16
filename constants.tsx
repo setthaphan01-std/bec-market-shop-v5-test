@@ -164,7 +164,7 @@ export const PRODUCTS: Product[] = [
     price: 200,
     category: Category.ACCESSORIES,
     description: 'เข็มขัดหนังสีดำพร้อมหัวเข็มขัดตรามหาวิทยาลัย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: '/image/23.png',
     stock: 100,
     level: 'ทั่วไป',
   },
@@ -174,7 +174,7 @@ export const PRODUCTS: Product[] = [
     price: 100,
     category: Category.ACCESSORIES,
     description: 'ถุงเท้าสีดำล้วน นุ่มสบาย ทนทาน',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: '/image/46.png',
     stock: 60,
     level: 'ทั่วไป'
   },
@@ -184,7 +184,7 @@ export const PRODUCTS: Product[] = [
     price: 5,
     category: Category.STATIONERY,
     description: 'สมุดจดบันทึกปกแข็ง ลายวิทยาลัย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: '/image/48.png',
     stock: 100,
     level: 'ทั่วไป',
     isRecommended: true
