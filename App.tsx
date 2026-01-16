@@ -31,6 +31,7 @@ import ProfilePage from './components/ProfilePage';
 import AdminDashboard from './components/AdminDashboard';
 import SizeSelectionModal from './components/SizeSelectionModal';
 import CheckoutModal from './components/CheckoutModal';
+import ImageZoomModal from './components/ImageZoomModal';
 import { Product, CartItem, Category, NavTarget, UserProfile } from './types';
 import { PRODUCTS as STATIC_PRODUCTS } from './constants';
 import { dbService } from './services/dbService';
@@ -46,9 +47,10 @@ const App: React.FC = () => {
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const [customProducts, setCustomProducts] = useState<Product[]>([]);
   
-  // Size selection state
+  // Modal & Selection state
   const [pendingProduct, setPendingProduct] = useState<Product | null>(null);
   const [isSizeModalOpen, setIsSizeModalOpen] = useState(false);
+  const [zoomedProduct, setZoomedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     const savedUser = localStorage.getItem('bec_user');
@@ -230,7 +232,7 @@ const App: React.FC = () => {
                 </h1>
                 
                 <p className="text-white/80 text-lg md:text-2xl max-w-3xl mx-auto font-light leading-relaxed animate-in fade-in duration-1000 delay-300">
-                  แหล่งรวมชุดนักเรียนนักศึกษา เครื่องหมายและอุปกรณ์การเรียนครบวงจร <br className="hidden md:block"/> สำหรับนักเรียนและนักศึกษา วิทยาลัยการอาชีพบ้านผือ
+                  เครื่องแบบนักศึกษาและอุปกรณ์การเรียนคุณภาพ <br className="hidden md:block"/> สั่งซื้อง่าย รับสินค้าไว ออกแบบมาเพื่อชาว BEC
                 </p>
 
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-8 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
@@ -271,7 +273,12 @@ const App: React.FC = () => {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                 {recommendedProducts.map(product => (
-                  <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
+                  <ProductCard 
+                    key={product.id} 
+                    product={product} 
+                    onAddToCart={addToCart} 
+                    onImageClick={setZoomedProduct}
+                  />
                 ))}
               </div>
 
@@ -364,7 +371,12 @@ const App: React.FC = () => {
               {filteredProducts.length > 0 ? (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                   {filteredProducts.map(product => (
-                    <ProductCard key={product.id} product={product} onAddToCart={addToCart} />
+                    <ProductCard 
+                      key={product.id} 
+                      product={product} 
+                      onAddToCart={addToCart} 
+                      onImageClick={setZoomedProduct}
+                    />
                   ))}
                 </div>
               ) : (
@@ -417,6 +429,15 @@ const App: React.FC = () => {
           items={cart}
           onClose={() => setIsCheckoutModalOpen(false)}
           onComplete={handleOrderComplete}
+        />
+      )}
+
+      {/* Image Zoom Modal */}
+      {zoomedProduct && (
+        <ImageZoomModal 
+          product={zoomedProduct}
+          onClose={() => setZoomedProduct(null)}
+          onAddToCart={addToCart}
         />
       )}
 
@@ -502,7 +523,9 @@ const App: React.FC = () => {
         <div className="max-w-7xl mx-auto border-t border-white/10 mt-20 pt-10 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-black text-white/20 uppercase tracking-[0.4em] relative z-10">
           <div className="text-center md:text-left">© 2025 BAN PHUE INDUSTRIAL COLLEGE - BEC MARKET SHOP PROJECT</div>
           <div className="flex items-center gap-8">
-
+            <a href="#" className="hover:text-[#FADA7A] transition-colors">Privacy</a>
+            <a href="#" className="hover:text-[#FADA7A] transition-colors">Terms</a>
+            <a href="#" className="hover:text-[#FADA7A] transition-colors">Cookies</a>
           </div>
         </div>
       </footer>

@@ -1,17 +1,21 @@
 
 import React from 'react';
-import { Plus, Star, GraduationCap } from 'lucide-react';
+import { Plus, Star, GraduationCap, ZoomIn } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
+  onImageClick?: (product: Product) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onImageClick }) => {
   return (
     <div className="bg-white rounded-[2rem] shadow-[0_10px_30px_rgba(54,116,181,0.05)] border border-[#3674B5]/5 overflow-hidden hover:shadow-[0_20px_50px_rgba(54,116,181,0.15)] hover:-translate-y-2 transition-all duration-500 group relative flex flex-col h-full">
-      <div className="relative aspect-[4/5] overflow-hidden bg-[#F9F9F9] flex items-center justify-center p-6">
+      <div 
+        className="relative aspect-[4/5] overflow-hidden bg-[#F9F9F9] flex items-center justify-center p-6 cursor-pointer"
+        onClick={() => onImageClick?.(product)}
+      >
         <img 
           src={product.image} 
           alt={product.name}
@@ -20,6 +24,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
             (e.target as HTMLImageElement).src = "https://lh3.googleusercontent.com/d/1jYWjkxe6el_VkyJxbmjIQGbYkdOOakx2";
           }}
         />
+        
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 bg-[#3674B5]/0 group-hover:bg-[#3674B5]/5 transition-colors duration-500 flex items-center justify-center">
+           <div className="bg-white/90 backdrop-blur-sm p-3 rounded-full opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-500 shadow-xl border border-[#3674B5]/10">
+              <ZoomIn className="w-6 h-6 text-[#3674B5]" />
+           </div>
+        </div>
         
         {/* Badge */}
         <div className="absolute top-4 left-4 bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full text-[10px] font-bold text-[#3674B5] shadow-sm flex items-center gap-1 border border-white">
