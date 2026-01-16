@@ -10,37 +10,13 @@
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
-            background-color: #F8F9FA;
-            /* Blueprint Grid Pattern */
+            background-color: #FFFFFF;
+            /* เพิ่มลายตารางโทนสีฟ้าอ่อน */
             background-image: 
-                linear-gradient(to right, rgba(54, 116, 181, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(54, 116, 181, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
+                linear-gradient(rgba(54, 116, 181, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(54, 116, 181, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
             overflow-x: hidden;
-        }
-
-        .bg-mesh {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            animation: move 20s infinite alternate;
-        }
-
-        @keyframes move {
-            from { transform: translate(0, 0) scale(1); }
-            to { transform: translate(100px, 100px) scale(1.2); }
         }
 
         @keyframes pop-in {
@@ -59,7 +35,7 @@
         .animate-float { animation: float 6s ease-in-out infinite; }
         
         .glass-morphism {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
@@ -87,16 +63,9 @@
   }
 }
 </script>
-<link rel="stylesheet" href="/index.css">
 </head>
 <body>
-    <div class="bg-mesh">
-        <div class="blob bg-[#3674B5] w-[500px] h-[500px] -top-20 -left-20"></div>
-        <div class="blob bg-[#FADA7A] w-[400px] h-[400px] bottom-0 right-0" style="animation-delay: -5s;"></div>
-        <div class="blob bg-[#578FCA] w-[300px] h-[300px] top-1/2 left-1/3" style="animation-delay: -10s;"></div>
-    </div>
     <div id="root"></div>
     <script type="module" src="index.tsx"></script>
-<script type="module" src="/index.tsx"></script>
 </body>
 </html>
