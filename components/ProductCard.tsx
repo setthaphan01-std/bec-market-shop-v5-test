@@ -15,7 +15,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
         <img 
           src={product.image} 
           alt={product.name}
-          className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700 opacity-80"
+          className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-700"
           onError={(e) => {
             (e.target as HTMLImageElement).src = "https://lh3.googleusercontent.com/d/1jYWjkxe6el_VkyJxbmjIQGbYkdOOakx2";
           }}
