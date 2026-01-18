@@ -82,7 +82,7 @@ export const PRODUCTS: Product[] = [
     price: 370,
     category: Category.UNIFORM,
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย',
-    image: 'https://www.bec.ac.th/images/Pic-Contents/logo.png',
+    image: '/image/8.png',
     stock: 100,
     /* Fixed: Added missing comma after level property */
     level: 'ปวช./ปวส.',
