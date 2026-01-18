@@ -56,6 +56,16 @@ export const PRODUCTS: Product[] = [
     isRecommended: true
   },
   {
+    id: '7',
+    name: 'เสื้อเชิ้ตนักศึกษาหญิง แขนยาว',
+    price: 270,
+    category: Category.UNIFORM,
+    description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
+    image: '/image/7.png',
+    stock: 100,
+    level: 'ปวส.'
+  },
+  {
     id: '6',
     name: 'กระโปรงทรงเอ ผ่าหลัง (ผ่าซ้อนทับ)',
     price: 120,
@@ -65,16 +75,6 @@ export const PRODUCTS: Product[] = [
     stock: 100,
     level: 'ปวช./ปวส.',
     isRecommended: true
-  },
-  {
-    id: '7',
-    name: 'เสื้อเชิ้ตนักศึกษาหญิง แขนยาว',
-    price: 270,
-    category: Category.UNIFORM,
-    description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
-    image: '/image/7.png',
-    stock: 100,
-    level: 'ปวส.'
   },
   {
     id: '8',
