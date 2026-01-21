@@ -53,7 +53,6 @@ export const PRODUCTS: Product[] = [
     image: '/image/5.png',
     stock: 100,
     level: 'ปวช.',
-    isRecommended: true
   },
   {
     id: '7',
