@@ -94,7 +94,8 @@ export const PRODUCTS: Product[] = [
     description: 'เนื้อผ้าหนาใส่สบาย ระบายอากาศได้ดี ซักง่าย รีดง่าย',
     image: '/image/9.png',
     stock: 100,
-    level: 'ปวช.'
+    level: 'ปวช.' ,
+    isRecommended: true
   },
   {
     id: '10',
