@@ -95,7 +95,6 @@ export const PRODUCTS: Product[] = [
     image: '/image/9.png',
     stock: 100,
     level: 'ปวช.'
-    isRecommended: true
   },
   {
     id: '10',
@@ -186,6 +185,5 @@ export const PRODUCTS: Product[] = [
     image: '/image/48.png',
     stock: 100,
     level: 'ทั่วไป',
-    isRecommended: true
   },
 ];
