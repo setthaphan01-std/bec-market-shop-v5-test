@@ -29,11 +29,20 @@ const AIAssistant: React.FC = () => {
     setMessages(newMessages);
     setIsLoading(true);
 
-    // ส่งประวัติทั้งหมดเพื่อให้ AI เข้าใจบริบท
     const response = await getShoppingRecommendation(newMessages);
     
     setMessages(prev => [...prev, { role: 'model', text: response }]);
     setIsLoading(false);
+  };
+
+  // Helper function to render text with basic bolding support
+  const formatText = (text: string) => {
+    return text.split(/(\*\*.*?\*\*)/).map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} className="font-black text-[#3674B5]">{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
   };
 
   return (
@@ -71,12 +80,12 @@ const AIAssistant: React.FC = () => {
                 }`}>
                   {msg.role === 'user' ? <User className="w-4 h-4" /> : <Sparkles className="w-4 h-4" />}
                 </div>
-                <div className={`max-w-[75%] p-4 rounded-2xl text-sm leading-relaxed shadow-sm ${
+                <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed shadow-sm whitespace-pre-wrap ${
                   msg.role === 'user' 
                     ? 'bg-[#3674B5] text-white rounded-br-none' 
                     : 'bg-white border border-[#3674B5]/10 text-gray-800 rounded-bl-none'
                 }`}>
-                  {msg.text}
+                  {formatText(msg.text)}
                 </div>
               </div>
             ))}
